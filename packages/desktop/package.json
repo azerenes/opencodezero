@@ -1,13 +1,13 @@
 {
-  "name": "@opencode-ai/desktop",
+  "name": "@pixi-ai/desktop",
   "private": true,
   "version": "1.15.3",
   "type": "module",
   "license": "MIT",
-  "homepage": "https://opencode.ai",
+  "homepage": "https://github.com/azerenes/pixi",
   "author": {
-    "name": "OpenCode",
-    "email": "hello@opencode.ai"
+    "name": "Pixi",
+    "email": "azerenes@github.com"
   },
   "scripts": {
     "typecheck": "tsgo -b",

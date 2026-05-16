@@ -13,6 +13,7 @@ import PROMPT_SCOUT from "./prompt/scout.txt"
 import PROMPT_SUMMARY from "./prompt/summary.txt"
 import PROMPT_TITLE from "./prompt/title.txt"
 import { Permission } from "@/permission"
+import { AGENT_ARMY } from "./agent-army"
 import { mergeDeep, pipe, sortBy, values } from "remeda"
 import { Global } from "@opencode-ai/core/global"
 import path from "path"
@@ -153,7 +154,7 @@ export const layer = Layer.effect(
                 },
                 edit: {
                   "*": "deny",
-                  [path.join(".opencode", "plans", "*.md")]: "allow",
+                  [path.join(".pixi", "plans", "*.md")]: "allow",
                   [path.relative(ctx.worktree, path.join(Global.Path.data, path.join("plans", "*.md")))]: "allow",
                 },
               }),
@@ -275,6 +276,19 @@ export const layer = Layer.effect(
             ),
             prompt: PROMPT_SUMMARY,
           },
+          ...Object.fromEntries(
+            Object.entries(AGENT_ARMY).map(([key, agent]) => [
+              key,
+              {
+                name: key,
+                mode: "subagent" as const,
+                native: true,
+                options: {},
+                permission: Permission.merge(defaults, agent.permission, user),
+                description: agent.description,
+              },
+            ]),
+          ),
         }
 
         for (const [key, value] of Object.entries(cfg.agent ?? {})) {

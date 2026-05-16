@@ -365,12 +365,12 @@ const live: Layer.Layer<
                 "x-opencode-session": input.sessionID,
                 "x-opencode-request": input.user.id,
                 "x-opencode-client": flags.client,
-                "User-Agent": `opencode/${InstallationVersion}`,
+                "User-Agent": `pixi/${InstallationVersion}`,
               }
             : {
                 "x-session-affinity": input.sessionID,
                 ...(input.parentSessionID ? { "x-parent-session-id": input.parentSessionID } : {}),
-                "User-Agent": `opencode/${InstallationVersion}`,
+                "User-Agent": `pixi/${InstallationVersion}`,
               }),
           ...input.model.headers,
           ...headers,

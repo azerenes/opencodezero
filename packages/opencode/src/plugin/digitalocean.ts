@@ -233,7 +233,7 @@ async function createModelAccessKey(bearer: string): Promise<ApiKeyInfo> {
     headers: {
       Authorization: `Bearer ${bearer}`,
       "Content-Type": "application/json",
-      "User-Agent": `opencode/${InstallationVersion}`,
+      "User-Agent": `pixi/${InstallationVersion}`,
     },
     body: JSON.stringify({ name }),
   })
@@ -253,7 +253,7 @@ async function listRouters(
     headers: {
       Authorization: `Bearer ${bearer}`,
       Accept: "application/json",
-      "User-Agent": `opencode/${InstallationVersion}`,
+      "User-Agent": `pixi/${InstallationVersion}`,
     },
     signal: AbortSignal.timeout(10_000),
   }).catch(() => undefined)

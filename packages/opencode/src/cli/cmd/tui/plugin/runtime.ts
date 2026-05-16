@@ -243,9 +243,9 @@ function createThemeInstaller(
     const name = path.basename(src, path.extname(src))
     const source_dir = path.dirname(meta.source)
     const local_dir =
-      path.basename(source_dir) === ".opencode"
+      path.basename(source_dir) === ".pixi"
         ? path.join(source_dir, "themes")
-        : path.join(source_dir, ".opencode", "themes")
+        : path.join(source_dir, ".pixi", "themes")
     const dest_dir = meta.scope === "local" ? local_dir : path.join(Global.Path.config, "themes")
     const dest = path.join(dest_dir, `${name}.json`)
     const stat = await Filesystem.statAsync(src)
@@ -830,7 +830,7 @@ function defaultPluginOrigin(state: RuntimeState, spec: string): ConfigPlugin.Or
   return {
     spec,
     scope: "local",
-    source: state.api.state.path.config || path.join(state.directory, ".opencode", "tui.json"),
+    source: state.api.state.path.config || path.join(state.directory, ".pixi", "tui.json"),
   }
 }
 
@@ -1072,8 +1072,8 @@ async function load(input: { api: Api; config: TuiConfig.Resolved; dispose?: () 
         return yield* RuntimeFlags.Service
       }).pipe(Effect.provide(RuntimeFlags.defaultLayer)),
     )
-    const records = Flag.OPENCODE_PURE ? [] : (config.plugin_origins ?? [])
-    if (Flag.OPENCODE_PURE && config.plugin_origins?.length) {
+    const records = Flag.PIXI_PURE ? [] : (config.plugin_origins ?? [])
+    if (Flag.PIXI_PURE && config.plugin_origins?.length) {
       log.info("skipping external tui plugins in pure mode", { count: config.plugin_origins.length })
     }
 
